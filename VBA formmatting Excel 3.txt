@@ -1,0 +1,35 @@
+Sub formatting_all()
+    For Index = 1 To ThisWorkbook.Sheets.Count
+    Worksheets(Index).Select
+    LR = Cells(Rows.Count, 1).End(xlUp).Row
+        For row_index = 1 To LR
+        If Application.CountA(Range("A" & row_index).EntireRow) = 0 Then
+            Range("A" & row_index).EntireRow.Interior.ColorIndex = 1
+        End If
+        Next row_index
+    'MsgBox (ThisWorkbook.Sheets.Count)
+    Range("K:K").Interior.ColorIndex = 0
+    Range("N:N").Interior.ColorIndex = 0
+    Range("O:O").Interior.ColorIndex = 0
+    If (Right(ActiveSheet.Name, 6) = "otherq" Or Right(ActiveSheet.Name, 3) = "RaR") Then
+    Range("J1").Formula = "=""q""&LEFT(RC[-9], FIND("" : "", RC[-9])-1)"
+    Range("J2:K" & LR).Formula = "=IFERROR(""q""&LEFT(RC[-9], FIND("" : "", RC[-9])-1), R[-1]C)"
+    Range("K1:K" & LR).Formula = "=IFERROR(IF(LEFT(R[0]C[-9],4)=""2022"",RC[-1],"".""), ""."")"
+    Range("N1:N" & LR).Formula = "=IF(LEFT(R[0]C[-12],4)=""2022"", RIGHT(R[0]C[-13], LEN(R[0]C[-13])-(FIND("" - "",R[0]C[-13])+2)),""."")"
+    Range("O1:O" & LR).Formula = "=IF(RC[-11]="""",""."",IF(LEFT(R[0]C[-13],4)=""2022"",IFERROR(RC[-11]*1, "".""),"".""))"
+    Range("J:J").EntireColumn.Interior.ColorIndex = 19
+    Range("K:K").EntireColumn.Interior.ColorIndex = 19
+    Range("N:N").EntireColumn.Interior.ColorIndex = 19
+    Range("O:O").EntireColumn.Interior.ColorIndex = 19
+    End If
+    If (Right(ActiveSheet.Name, 3) = "aeq") Then
+    Range("K2:K" & LR).Formula = "=IF(ISNUMBER(FIND(""AEC"", ""q""&LEFT(RC[-10], FIND("" - "", RC[-10])-1))),SUBSTITUTE(""q""&TRIM(SUBSTITUTE((LEFT(R[0]C[-10],FIND(""-"",R[0]C[-10])-1)), ""AEC"",""""))&""aec"", ""q0"",""q""),IFERROR(""q""&LEFT(RC[-10], FIND("" - "", RC[-10])-1),""""))"
+    Range("K:K").EntireColumn.Interior.ColorIndex = 24
+    End If
+    Next Index
+End Sub
+
+
+
+
+

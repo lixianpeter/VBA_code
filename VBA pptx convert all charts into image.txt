@@ -1,0 +1,56 @@
+Sub EnumChartsInPresentation()
+
+Dim sld As Slide
+Dim shp As Shape
+Dim ctr As Long
+
+For Each sld In ActivePresentation.Slides
+    For ctr = sld.Shapes.Count To 1 Step -1
+        If GetShapeType(sld.Shapes(ctr)) = msoChart Then
+            Call ConvertChartToImage(sld, sld.Shapes(ctr))
+        End If
+    Next
+Next
+
+End Sub
+
+ 
+
+Function GetShapeType(shp As Shape) As MsoShapeType
+
+If shp.Type = msoPlaceholder Then
+    If shp.PlaceholderFormat.ContainedType = msoChart Then
+        GetShapeType = msoChart
+        Exit Function
+    End If
+End If
+
+GetShapeType = shp.Type
+
+End Function
+
+ 
+
+Sub ConvertChartToImage(sld As Slide, shp As Shape)
+
+Dim shpChartImage As Object
+
+shp.Copy
+DoEvents
+Set shpChartImage = sld.Shapes.PasteSpecial(ppPastePNG)
+With shpChartImage
+    .Left = shp.Left
+    .Top = shp.Top
+   
+    Do While shp.ZOrderPosition < shpChartImage.ZOrderPosition
+        Call shpChartImage.ZOrder(msoSendBackward)
+    Loop
+   
+    shp.Visible = False
+    'shp.Delete
+    'Set shp = Nothing
+End With
+
+End Sub
+
+ 

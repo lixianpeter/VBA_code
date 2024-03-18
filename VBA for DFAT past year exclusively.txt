@@ -1,0 +1,56 @@
+Sub renamesheet()
+
+
+Dim i As Integer, oldname As String, newname As String
+
+i = 1
+Do Until i > 390
+    j = 3
+    Do Until j > 10
+    oldname = Sheets("Sheet1").Cells(i, 2) & "_" & Sheets("Sheet2").Cells(1, j)
+    newname = Sheets("Sheet1").Cells(i, 1) & "_" & Sheets("Sheet2").Cells(1, j)
+    'MsgBox (oldname)
+    On Error GoTo ErrorHandler
+     Sheets(oldname).Name = newname
+    j = j + 1
+    Loop
+i = i + 1
+Loop
+ErrorHandler:
+ Resume Next
+ 
+ 
+ 
+
+End Sub
+Sub checksheet()
+Dim newname As String
+i = 2
+Do Until i > 390
+    j = 3
+    Do Until j > 10
+        If Sheets("Sheet2").Cells(i, j).Value <> "Missing" Then
+            Sheets("Sheet2").Cells(i, j).Interior.ColorIndex = 0
+            Sheets("Sheet2").Cells(i, j).Value = ""
+        End If
+        newname = Sheets("Sheet2").Cells(i, 1) & "_" & Sheets("Sheet2").Cells(1, j)
+        'Sheets("Sheet2").Cells(i, j).Select
+        If WorksheetExists(newname) = False And Sheets("Sheet2").Cells(i, 2) <> "" And Sheets("Sheet2").Cells(i, j).Value <> "Missing" Then
+            Sheets("Sheet2").Cells(i, j).Interior.ColorIndex = 3
+            Sheets("Sheet2").Cells(i, j).Value = WorksheetExists(newname)
+        End If
+        j = j + 1
+    Loop
+    i = i + 1
+Loop
+End Sub
+
+Function WorksheetExists(shtName As String, Optional wb As Workbook) As Boolean
+    Dim sht As Worksheet
+
+    If wb Is Nothing Then Set wb = ThisWorkbook
+    On Error Resume Next
+    Set sht = wb.Sheets(shtName)
+    On Error GoTo 0
+    WorksheetExists = Not sht Is Nothing
+End Function

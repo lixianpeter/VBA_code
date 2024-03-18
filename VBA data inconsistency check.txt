@@ -1,0 +1,335 @@
+Sub data_checking()
+    Worksheets(1).Select
+       LR = Cells(Rows.Count, 1).End(xlUp).Row
+           For row_index = 2 To LR
+               Range("A" & row_index).EntireRow.Interior.ColorIndex = 0
+           Next row_index
+    Worksheets(1).Range("II:II").ClearContents
+    Worksheets(1).Range("II1") = "Comment"
+    Worksheets(1).Select
+    LR = Cells(Rows.Count, 1).End(xlUp).Row
+        For row_index = 2 To LR
+        
+            If Range("L" & row_index).Value = 0 And Range("M" & row_index).Value = 0 And Range("N" & row_index).Value = 0 And _
+            Range("O" & row_index).Value = 0 And Range("AA" & row_index).Value <> 0 Then
+                Range("AA" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q2"
+            End If
+            If (Range("L" & row_index).Value <> 0 Or Range("M" & row_index).Value <> 0 Or Range("N" & row_index).Value <> 0 Or _
+            Range("O" & row_index).Value <> 0) And Range("AA" & row_index).Value = 0 Then
+                Range("AA" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q2"
+            End If
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("L" & row_index).Value = 0 And Range("AC" & row_index).Value <> 0 Then
+                Range("AC" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q3"
+            End If
+            If Range("L" & row_index).Value <> 0 And Range("AC" & row_index).Value = 0 Then
+                Range("AC" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q3"
+            End If
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("L" & row_index).Value = 0 And Range("M" & row_index).Value = 0 And Range("O" & row_index).Value = 0 And _
+            Range("AF" & row_index).Value <> 0 Then
+                Range("A" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q5"
+            End If
+            If (Range("L" & row_index).Value <> 0 Or Range("M" & row_index).Value <> 0 Or Range("O" & row_index).Value <> 0) And _
+            Range("AF" & row_index).Value = 0 Then
+                Range("AA" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q5"
+            End If
+            
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("BG" & row_index).Value < Application.WorksheetFunction.Sum(Range("BH" & row_index & ":BL" & row_index)) Then
+                Range("BG" & row_index & ":BL" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q8q9"
+            End If
+            If Range("BG" & row_index).Value > Application.WorksheetFunction.Sum(Range("BH" & row_index & ":BL" & row_index)) Then
+                Range("BG" & row_index & ":BL" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q8q9"
+            End If
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+            If Range("BG" & row_index).Value = 0 And Application.WorksheetFunction.Sum(Range("BN" & row_index & ":BT" & row_index)) > 0 Then
+                Range("BN" & row_index & ":BT" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q10"
+            End If
+            If Range("BG" & row_index).Value <> 0 And Application.WorksheetFunction.Sum(Range("BN" & row_index & ":BT" & row_index)) = 0 Then
+                Range("BN" & row_index & ":BT" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q10"
+            End If
+            
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("BX" & row_index).Value <> 0 And Application.WorksheetFunction.Sum(Range("BU" & row_index & ":BW" & row_index)) > 0 Then
+                Range("BU" & row_index & ":BX" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q11"
+            End If
+            
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("BX" & row_index).Value <> 0 And Application.WorksheetFunction.Sum(Range("BY" & row_index & ":CJ" & row_index)) > 0 Then
+                Range("BY" & row_index & ":CJ" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q12"
+            End If
+            If Application.WorksheetFunction.Sum(Range("BU" & row_index & ":BW" & row_index)) > 0 And _
+            Application.WorksheetFunction.Sum(Range("BY" & row_index & ":CJ" & row_index)) = 0 Then
+                Range("BY" & row_index & ":CJ" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q12"
+            End If
+            
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If (Range("DD" & row_index).Value <> 0 Or Range("DE" & row_index).Value <> 0) And _
+            Application.WorksheetFunction.Sum(Range("CT" & row_index & ":DC" & row_index)) > 0 Then
+                Range("CT" & row_index & ":DE" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q15"
+            End If
+            
+            
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If (Range("DQ" & row_index).Value <> 0) And _
+            Application.WorksheetFunction.Sum(Range("DG" & row_index & ":DP" & row_index)) > 0 Then
+                Range("DG" & row_index & ":DQ" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q16"
+            End If
+        
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("DW" & row_index).Value <> 1 And Range("DX" & row_index).Value <> 0 Then
+                Range("DW" & row_index & ":DX" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q17f"
+            End If
+            If Range("DW" & row_index).Value = 1 And Range("DX" & row_index).Value = 0 Then
+                Range("DW" & row_index & ":DX" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q17f"
+            End If
+            
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("DW" & row_index).Value <> 1 And Range("DY" & row_index).Value <> 0 Then
+                Range("DW" & row_index & ":DY" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q17g"
+            End If
+            If Range("DW" & row_index).Value = 1 And Range("DY" & row_index).Value = 0 Then
+                Range("DW" & row_index & ":DY" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q17g"
+            End If
+                        
+                        
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Application.WorksheetFunction.Sum(Range("EF" & row_index & ":EN" & row_index)) > 0 And Range("DU" & row_index).Value <> 1 Then
+                Range("EF" & row_index & ":EN" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q18"
+            End If
+            If Application.WorksheetFunction.Sum(Range("EF" & row_index & ":EN" & row_index)) = 0 And Range("DU" & row_index).Value = 1 Then
+                Range("EF" & row_index & ":EN" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q18"
+            End If
+            If Range("EK" & row_index).Value <> 0 And Range("DW" & row_index).Value <> 1 Then
+                Range("EK" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q18f"
+            End If
+                                                
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("DS" & row_index).Value <> 1 And Range("ES" & row_index).Value <> 0 Then
+                Range("ES" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DT" & row_index).Value <> 1 And Range("ET" & row_index).Value <> 0 Then
+                Range("ET" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DW" & row_index).Value <> 1 And Range("EU" & row_index).Value <> 0 Then
+                Range("EU" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DX" & row_index).Value <> 1 And Range("EV" & row_index).Value <> 0 Then
+                Range("EV" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DY" & row_index).Value <> 1 And Range("EW" & row_index).Value <> 0 Then
+                Range("EW" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DZ" & row_index).Value <> 1 And Range("EX" & row_index).Value <> 0 Then
+                Range("EX" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("EA" & row_index).Value <> 1 And Range("EY" & row_index).Value <> 0 Then
+                Range("EY" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("EB" & row_index).Value <> 1 And Range("EZ" & row_index).Value <> 0 Then
+                Range("EZ" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("EC" & row_index).Value <> 1 And Range("FA" & row_index).Value <> 0 Then
+                Range("FA" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("ED" & row_index).Value <> 1 And Range("FB" & row_index).Value <> 0 Then
+                Range("FB" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("EE" & row_index).Value <> 1 And Range("FC" & row_index).Value <> 0 Then
+                Range("FC" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+
+
+
+
+
+
+
+
+            If Range("DS" & row_index).Value = 1 And Range("ES" & row_index).Value = 0 Then
+                Range("ES" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DT" & row_index).Value = 1 And Range("ET" & row_index).Value = 0 Then
+                Range("ET" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DW" & row_index).Value = 1 And Range("EU" & row_index).Value = 0 Then
+                Range("EU" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DX" & row_index).Value = 1 And Range("EV" & row_index).Value = 0 Then
+                Range("EV" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DY" & row_index).Value = 1 And Range("EW" & row_index).Value = 0 Then
+                Range("EW" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("DZ" & row_index).Value = 1 And Range("EX" & row_index).Value = 0 Then
+                Range("EX" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("EA" & row_index).Value = 1 And Range("EY" & row_index).Value = 0 Then
+                Range("EY" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("EB" & row_index).Value = 1 And Range("EZ" & row_index).Value = 0 Then
+                Range("EZ" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("EC" & row_index).Value = 1 And Range("FA" & row_index).Value = 0 Then
+                Range("FA" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("ED" & row_index).Value = 1 And Range("FB" & row_index).Value = 0 Then
+                Range("FB" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+            If Range("EE" & row_index).Value = 1 And Range("FC" & row_index).Value = 0 Then
+                Range("FC" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q20"
+            End If
+                                                
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+
+            If Range("L" & row_index).Value = 0 And Range("M" & row_index).Value = 0 And Range("FF" & row_index).Value <> 0 Then
+                Range("FF" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q22b"
+            End If
+            If (Range("L" & row_index).Value = 1 Or Range("M" & row_index).Value = 1) And Range("FF" & row_index).Value = 0 Then
+                Range("FF" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q22b"
+            End If
+            
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+
+            If Range("L" & row_index).Value = 0 And Range("M" & row_index).Value = 0 And Range("FG" & row_index).Value <> 0 Then
+                Range("FG" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q22c"
+            End If
+            If (Range("L" & row_index).Value = 1 Or Range("M" & row_index).Value = 1) And Range("FG" & row_index).Value = 0 Then
+                Range("FG" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q22c"
+            End If
+            
+            
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+
+            If Range("L" & row_index).Value = 0 And (Range("GZ" & row_index).Value <> "" Or Range("HA" & row_index).Value <> "") Then
+                Range("GZ" & row_index & ":HA" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q27_1718"
+            End If
+            If (Range("L" & row_index).Value = 1) And (Range("GZ" & row_index).Value = "" Or Range("HA" & row_index).Value = "") Then
+                Range("GZ" & row_index & ":HA" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q27_1718"
+            End If
+                       
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("M" & row_index).Value = 0 And (Range("HB" & row_index).Value <> "" Or Range("HC" & row_index).Value <> "") Then
+                Range("HB" & row_index & ":HC" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q27_1920"
+            End If
+            If (Range("M" & row_index).Value = 1) And (Range("HB" & row_index).Value = "" Or Range("HC" & row_index).Value = "") Then
+                Range("HB" & row_index & ":HC" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q27_1920"
+            End If
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("N" & row_index).Value = 0 And (Range("HD" & row_index).Value <> "" Or Range("HE" & row_index).Value <> "") Then
+                Range("HD" & row_index & ":HE" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q27_2122"
+            End If
+            If (Range("N" & row_index).Value = 1) And (Range("HD" & row_index).Value = "" Or Range("HE" & row_index).Value = "") Then
+                Range("HD" & row_index & ":HE" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q27_2122"
+            End If
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("GR" & row_index).Value <> "Australia" And (Range("IF" & row_index).Value <> 0) Then
+                Range("IF" & row_index).Interior.ColorIndex = 3
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q34_3"
+            End If
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("ID" & row_index).Value <> 0 And (Range("IG" & row_index).Value = "") Then
+                Range("IG" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q34_1"
+            End If
+            
+            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            
+            If Range("IE" & row_index).Value <> 0 And (Range("IH" & row_index).Value = "") Then
+                Range("IH" & row_index).Interior.ColorIndex = 6
+                Range("II" & row_index).Value = Range("II" & row_index).Value & "q34_2"
+            End If
+                        
+            
+        Next row_index
+
+End Sub
+
+
+
+

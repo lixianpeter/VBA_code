@@ -1,0 +1,17 @@
+Sub CreateSheet()
+    Dim ws As Worksheet
+    i = 1
+    Do Until i > 19
+        Set ws = ThisWorkbook.Sheets.Add(After:= _
+                 ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count))
+        ws.Name = Sheets("index").Cells(i, 3) & "_aeq"
+        Set ws = ThisWorkbook.Sheets.Add(After:= _
+                 ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count))
+        ws.Name = Sheets("index").Cells(i, 3) & "_j"
+        Set ws = ThisWorkbook.Sheets.Add(After:= _
+                 ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count))
+        ws.Name = Sheets("index").Cells(i, 3) & "_m"
+    i = i + 1
+    Loop
+End Sub
+

@@ -1,0 +1,20 @@
+Sub formatting_all()
+    For Index = 1 To ThisWorkbook.Sheets.Count
+        Worksheets(Index).Select
+        If Right(ActiveSheet.Name, 4) <= 2019 And Range("A1").Value <> "ProjectId" Then
+            lrow = Cells(Rows.Count, "K").End(xlUp).Row
+            For row_index = 1 To lrow
+                Range("K" & row_index).Formula = "=IF(RC[-10]="""","""",RC[-10])"
+                'Range("K1").AutoFill Destination:=Range("K1:K" & lrow)
+                Range("K" & row_index).Value = Range("K" & row_index).Value
+                Range("K" & row_index).Font.ColorIndex = 10
+                Range("N" & row_index).Formula = "=IF(RC[-11]="""","""",RC[-11])"
+                Range("N" & row_index).Value = Range("N" & row_index).Value
+                Range("N" & row_index).Font.ColorIndex = 10
+                Range("O" & row_index).Formula = "=IF(RC[-10]="""","""",RC[-10])"
+                Range("O" & row_index).Value = Range("O" & row_index).Value
+                Range("O" & row_index).Font.ColorIndex = 10
+            Next row_index
+        End If
+    Next Index
+End Sub

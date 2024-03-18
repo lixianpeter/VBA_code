@@ -1,0 +1,173 @@
+Sub data_wrangling()
+    For Index = 2 To ThisWorkbook.Sheets.Count
+        'remove all pictures
+        Worksheets(Index).Select
+        ActiveSheet.Pictures.Delete
+        'formatting the tab with a clean format
+        Application.CutCopyMode = False
+        Selection.Copy
+        Range("Z1").Select
+        Application.CutCopyMode = False
+        Selection.Copy
+        Columns("A:Y").Select
+        Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlNone, _
+        SkipBlanks:=False, Transpose:=False
+        Application.CutCopyMode = False
+        If (Right(ActiveSheet.Name, 3) = "aeq") Then
+            'remove useless info
+            LR = Cells(Rows.Count, 1).End(xlUp).Row
+            row_index = 1
+            Do Until row_index > LR
+                If Range("C" & row_index) = "" Then
+                    Rows(row_index).EntireRow.Delete
+                    row_index = row_index - 1
+                    LR = Cells(Rows.Count, 1).End(xlUp).Row
+                End If
+                row_index = row_index + 1
+            Loop
+            ActiveSheet.Range("C:D").EntireColumn.Insert
+            'convert to desired format
+            LR = Cells(Rows.Count, 1).End(xlUp).Row
+            row_index = 1
+            Do Until row_index > (LR + 2)
+                If Range("A" & row_index) <> "" Then
+                    relative_index = 0
+                End If
+                If Range("A" & row_index) = "" Then
+                    Range("E" & row_index).Select
+                    relative_index = relative_index + 1
+                    ActiveSheet.Cells(ActiveCell.Row - relative_index, ActiveCell.Column - relative_index).Value = Range("E" & row_index).Value
+                End If
+                row_index = row_index + 1
+            Loop
+            'remove useless rows
+            LR = Cells(Rows.Count, 5).End(xlUp).Row
+            row_index = 1
+            Do Until row_index > LR
+                If Range("A" & row_index) = "" Then
+                    Rows(row_index).EntireRow.Delete
+                    row_index = row_index - 1
+                    LR = Cells(Rows.Count, 5).End(xlUp).Row
+                End If
+                row_index = row_index + 1
+            Loop
+            Range("C1").Value = "Unfavorable"
+            Range("D1").Value = "Neutral"
+            Range("E1").Value = "Favorable"
+        End If
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
+        If (Right(ActiveSheet.Name, 2) = "_j" Or Right(ActiveSheet.Name, 2) = "_m") Then
+            LR = Cells(Rows.Count, 1).End(xlUp).Row
+            row_index = 1
+            Do Until row_index > LR
+                If Range("B" & row_index) = "" Then
+                    Rows(row_index).EntireRow.Delete
+                    row_index = row_index - 1
+                    LR = Cells(Rows.Count, 1).End(xlUp).Row
+                End If
+                row_index = row_index + 1
+            Loop
+            LR = Cells(Rows.Count, 1).End(xlUp).Row
+            LC = ActiveSheet.UsedRange.Columns.Count
+            row_index = 1
+            Do Until row_index > LR
+                If InStr(1, LCase(Range("A" & row_index)), ":") <> 0 Then
+                    'Range("A" & (question_row_index)).EntireRow.Delete
+                    question_row_index = row_index
+                End If
+                If Range("A" & row_index) = "" Then
+                   Range("A" & row_index).Select
+                   ActiveCell.EntireRow.Insert
+                   Range("A" & row_index) = Range("A" & question_row_index)
+                   Range("B" & row_index) = "Data Source"
+                   Range("C" & row_index) = "%"
+                   Range("D" & row_index) = "Count"
+                   Range("A" & (row_index + 1)).EntireRow.Delete
+                   LR = Cells(Rows.Count, 1).End(xlUp).Row
+                End If
+                If Range("A" & row_index) <> "" And InStr(1, LCase(Range("A" & row_index)), ":") = 0 Then
+                    column_index = 2
+                    Do Until column_index > (LC - 1)
+                        Cells(row_index, column_index).Select
+                        If ActiveCell.Value = 0 Then Exit Do
+                        ActiveCell.EntireRow.Insert
+                        Cells(ActiveCell.Row + 1, ActiveCell.Column).Select
+                        Range("A" & (ActiveCell.Row - 1)).Value = Range("A" & ActiveCell.Row).Value
+                        Range("B" & (ActiveCell.Row - 1)).Value = Cells(question_row_index, ActiveCell.Column).Value
+                        Range("C" & (ActiveCell.Row - 1)).Value = ActiveCell.Value
+                        Range("D" & (ActiveCell.Row - 1)).Value = Cells(ActiveCell.Row, ActiveCell.Column + 1).Value
+                        row_index = row_index + 1
+                        LR = Cells(Rows.Count, 1).End(xlUp).Row
+                        column_index = column_index + 2
+                    Loop
+                    'ActiveCell.EntireRow.Delete
+                End If
+            row_index = row_index + 1
+            Loop
+            LR = Cells(Rows.Count, 1).End(xlUp).Row
+            row_index = 1
+            Do Until row_index > LR
+                If InStr(1, LCase(Range("A" & row_index)), ":") <> 0 And Range("B" & row_index) <> "Data Source" Then
+                    Rows(row_index).EntireRow.Delete
+                    row_index = row_index - 1
+                    LR = Cells(Rows.Count, 1).End(xlUp).Row
+                End If
+            row_index = row_index + 1
+            Loop
+            LR = Cells(Rows.Count, 1).End(xlUp).Row
+            row_index = 1
+            Do Until row_index > LR
+                If IsNumeric(Range("B" & row_index).Value) Then
+                    Rows(row_index).EntireRow.Delete
+                    row_index = row_index - 1
+                    LR = Cells(Rows.Count, 1).End(xlUp).Row
+                End If
+            row_index = row_index + 1
+            Loop
+            LR = Cells(Rows.Count, 1).End(xlUp).Row
+            row_index = 1
+            Do Until row_index > LR
+                If InStr(1, LCase(Range("A" & row_index)), ":") <> 0 And row_index <> 1 Then
+                    Range("A" & row_index).Select
+                    ActiveCell.EntireRow.Insert
+                    row_index = row_index + 1
+                    Range("A" & row_index).Select
+                    ActiveCell.EntireRow.Insert
+                    row_index = row_index + 1
+                    LR = Cells(Rows.Count, 1).End(xlUp).Row
+                End If
+            row_index = row_index + 1
+            Loop
+        End If
+    
+    
+        'formatting the tab with a clean format
+        Columns("A:Z").ColumnWidth = 10
+        Columns("A:Z").RowHeight = 15
+        
+    Next Index
+End Sub
+
+
+
+
+
+
+
+
+

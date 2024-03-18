@@ -1,0 +1,8 @@
+Sub Merge_all()
+    For Index = 2 To ThisWorkbook.Sheets.Count
+    Worksheets(1).Select
+    LR = Cells(Rows.Count, 1).End(xlUp).Row + 1
+    Worksheets(Index).Select
+    Range("A2").CurrentRegion.Copy Worksheets(1).Range("A" & LR)
+    Next Index
+End Sub

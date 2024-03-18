@@ -1,0 +1,22 @@
+Sub renamesheet()
+
+
+Dim i As Integer, oldname As String, newname As String
+
+i = 1
+Do Until i > 389
+oldname = Sheets("Sheet1").Cells(i, 2) & "_2014"
+newname = Sheets("Sheet1").Cells(i, 1) & "_2014"
+'MsgBox (oldname)
+On Error GoTo ErrorHandler
+ Sheets(oldname).Name = newname
+
+
+i = i + 1
+Loop
+ErrorHandler:
+ Resume Next
+
+
+End Sub
+

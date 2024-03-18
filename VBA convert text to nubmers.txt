@@ -1,0 +1,9 @@
+Sub ConvertTextToNumber()
+For Index = 1 To ThisWorkbook.Sheets.Count
+    Worksheets(Index).Select
+With Range("A1:O8000")
+.NumberFormat = "General"
+.Value = .Value
+End With
+    Next Index
+End Sub
